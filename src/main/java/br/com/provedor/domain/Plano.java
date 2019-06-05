@@ -1,50 +1,52 @@
 package br.com.provedor.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table (name = "Planos")
-public class Plano {
+@Table(name = "planos")
+public class Plano implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
-	@Column(nullable=false)
-	private String nomePlano;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer codigo;
 	
-	@Column(nullable=false)
-	private int velocidade;
+	@Column(length = 30)
+	private String nome;
 	
-	@Column(nullable=false)
-	private float valor;
+	@Column(nullable = false)
+	private Integer velocidade;
 	
-	@Column(nullable=false)
-	private boolean disponibilidade;
-	
-	
-	public String getNomePlano() {
-		return nomePlano;
+
+	public Integer getCodigo() {
+		return codigo;
 	}
-	public void setNomePlano(String nomePlano) {
-		this.nomePlano = nomePlano;
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
-	public int getVelocidade() {
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public Integer getVelocidade() {
 		return velocidade;
 	}
-	public void setVelocidade(int velocidade) {
+	public void setVelocidade(Integer velocidade) {
 		this.velocidade = velocidade;
 	}
-	public float getValor() {
-		return valor;
-	}
-	public void setValor(float valor) {
-		this.valor = valor;
-	}
-	public boolean isDisponibilidade() {
-		return disponibilidade;
-	}
-	public void setDisponibilidade(boolean disponibilidade) {
-		this.disponibilidade = disponibilidade;
-	}
 	
+	@Override
+	public String toString() {
+		return "Plano: nome=" + nome + ", velocidade=" + velocidade + ".";
+	}
 	
 }

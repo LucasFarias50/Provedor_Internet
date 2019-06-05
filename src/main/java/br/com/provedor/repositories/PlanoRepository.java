@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.provedor.domain.Plano;
 
 @Repository
-public interface PlanoRepository extends JpaRepository <Plano, Integer> {
+public interface PlanoRepository extends JpaRepository<Plano, Integer>{
 
 }

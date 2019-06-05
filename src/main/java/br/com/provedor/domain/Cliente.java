@@ -1,64 +1,64 @@
 package br.com.provedor.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Clientes")
-public class Cliente extends Pessoa {
-	
-	@Column
-	private Plano tipoPlano;
-	@Column
-	private Endereco endCliente;
-	@Column
-	private Pagamento situacaoPag;
-	
-	
-	
-	public Plano getTipoPlano() {
-		return tipoPlano;
-	}
+@Table(name = "clientes")
+public class Cliente implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-	public void setTipoPlano(Plano tipoPlano) {
-		this.tipoPlano = tipoPlano;
+	@Id
+	@Column(nullable=false)
+	private String cpf;
+	
+	@Column(length = 80, nullable = false)
+	private String nome;
+	
+	@OneToOne
+	@JoinColumn(name = "endereco_codigo")
+	private Endereco Endereco;
+	
+	@ManyToOne
+	@JoinColumn(name = "plano_codigo")
+	private Plano Plano;
+	
+	
+	public String getCpf() {
+		return cpf;
 	}
-
-	public Endereco getEndCliente() {
-		return endCliente;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
-
-	public void setEndCliente(Endereco endCliente) {
-		this.endCliente = endCliente;
+	public String getNome() {
+		return nome;
 	}
-
-	public Pagamento getSituacaoPag() {
-		return situacaoPag;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-
-	public void setSituacaoPag(Pagamento situacaoPag) {
-		this.situacaoPag = situacaoPag;
+	public Endereco getEndereco() {
+		return Endereco;
 	}
-
-	public void cadastrar() {
-		
+	public void setEndereco(Endereco endereco) {
+		Endereco = endereco;
+	}
+	public Plano getPlano() {
+		return Plano;
+	}
+	public void setPlano(Plano plano) {
+		Plano = plano;
 	}
 	
-	public void pedirInstalacao() {
-		
-	}
-	
-	public void pagarConta() {
-		
-	} 
-	
-	public void trocarPlano() {
-		
-	}
-	
-	public void cancelarPlano() {
-		
+	@Override
+	public String toString() {
+		return "Cliente: nome=" + nome + " / " + this.Endereco.toString() + " / " + this.Plano.toString() + "]";
 	}
 	
 }

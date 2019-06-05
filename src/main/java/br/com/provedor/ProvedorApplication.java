@@ -2,52 +2,64 @@ package br.com.provedor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import br.com.provedor.domain.Pessoa;
-import br.com.provedor.domain.Cliente;
-import br.com.provedor.domain.Tecnico;
-import br.com.provedor.domain.Plano;
-import br.com.provedor.domain.Endereco;
-import br.com.provedor.domain.Pagamento;
-
-import br.com.provedor.repositories.PessoaRepository;
-import br.com.provedor.repositories.ClienteRepository;
-import br.com.provedor.repositories.TecnicoRepository;
-import br.com.provedor.repositories.PlanoRepository;
-import br.com.provedor.repositories.EnderecoRepository;
-import br.com.provedor.repositories.PagamentoRepository;
+import br.com.provedor.domain.*;
+import br.com.provedor.repositories.*;
 
 @SpringBootApplication
 public class ProvedorApplication implements CommandLineRunner {
 
 	@Autowired
-	private ClienteRepository ClienteRep;
+	private ClienteRepository clienteRep;
 	
 	@Autowired
-	private EnderecoRepository EnderecoRep;
+	private EnderecoRepository enderecoRep;
 	
 	@Autowired
-	private PagamentoRepository PagamentoRep;
+	private PlanoRepository planoRep;
 	
 	@Autowired
-	private PessoaRepository PessoaRep;
+	private TecnicoRepository tecnicoRep;
 	
-	@Autowired
-	private PlanoRepository PlanoRep;
-	
-	@Autowired
-	private TecnicoRepository TecnicoRep;
+	public static void main(String[] args) {
+		SpringApplication.run(ProvedorApplication.class, args);
+	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
+		
+		Plano plano1 = new Plano();
+		plano1.setNome("20 MB/s");
+		plano1.setVelocidade(20);
+		
+		planoRep.save(plano1);
+		
+		Endereco endereco1 = new Endereco();
+		endereco1.setBairro("Petropolis");
+		endereco1.setCep("55131-211");
+		endereco1.setCidade("Caruaru");
+		endereco1.setLogradouro("Rua Antenor Navarro");
+		endereco1.setNumero(590);
+		
+		enderecoRep.save(endereco1);
+		
+		Cliente cliente1 = new Cliente();
+		cliente1.setCpf("112.380.124-26");
+		cliente1.setNome("Geraldo de Rivia");
+		cliente1.setEndereco(endereco1);
+		cliente1.setPlano(plano1);
+		
+		clienteRep.save(cliente1);
+		
+		Tecnico tecnico1 = new Tecnico();
+		tecnico1.setNome("Mario do gato");
+		tecnico1.setCpf("574.284.212-45");
+		tecnico1.setCliente(cliente1);
+		
+		tecnicoRep.save(tecnico1);
 		
 	}
 
-	
-		
-	
-	
-	
 }
