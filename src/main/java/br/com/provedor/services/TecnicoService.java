@@ -22,7 +22,6 @@ public class TecnicoService {
 		}
 
 		public Tecnico salvar(Tecnico tecnico) {
-			tecnico.setCpf(null);
 			return tecnicoRepository.save(tecnico);
 		}
 		

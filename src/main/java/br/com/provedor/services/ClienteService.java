@@ -22,7 +22,6 @@ public class ClienteService {
 	}
 
 	public Cliente salvar(Cliente cliente) {
-		cliente.setCpf(null);
 		return clienteRepository.save(cliente);
 	}
 	
